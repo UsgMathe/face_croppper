@@ -1,6 +1,5 @@
-"use client"
+'use client'
 
-import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import { API_Post } from "../../services/api/API_Post"
 
@@ -9,8 +8,6 @@ import { useFaceDetection } from "react-use-face-detection"
 import FaceDetection from '@mediapipe/face_detection'
 import { Camera } from '@mediapipe/camera_utils'
 import React from "react"
-
-import Cookies from 'js-cookie'
 
 import Header from "../../components/Header"
 import PopupMessage from "../../components/PopupMessage"
@@ -24,7 +21,6 @@ import { BsPerson, BsPersonCheck } from 'react-icons/bs'
 
 export default function CadastroRosto() {
 
-  const route = useRouter()
 
 
   const [camVideo, setCamVideo] = useState({
@@ -49,7 +45,6 @@ export default function CadastroRosto() {
 
   const [hasPhoto, setHasPhoto] = useState(false)
 
-  const [disableAll, setDisableAll] = useState(false)
   const [disableSend, setDisableSend] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -86,12 +81,6 @@ export default function CadastroRosto() {
 
 
   useEffect(() => {
-    getVideo()
-  }, [webcamRef])
-
-
-
-  function getVideo() {
     navigator.mediaDevices
       ?.getUserMedia({
         video: { width: 1920, height: 1080 }
@@ -105,10 +94,7 @@ export default function CadastroRosto() {
       .catch(err => {
         console.log(err)
       })
-
-  }
-
-
+  }, [webcamRef])
 
   const [timerPhotoInterval, setTimerPhotoInterval] = useState(null);
   const [counter, setCounter] = useState('');
@@ -138,12 +124,10 @@ export default function CadastroRosto() {
         clearInterval(timerPhotoInterval);
         setTimerPhotoInterval(null);
         setCounter(defaultTimer)
-        setDisableAll(false)
       }
     }
     if (detected && facesDetected === 1 && !hasPhoto && boundingBox.length === 1) {
       if (!timerPhotoInterval) {
-        setDisableAll(true)
         const interval = setInterval(() => {
           timer = timer - 1;
           setCounter(timer)
@@ -261,7 +245,6 @@ export default function CadastroRosto() {
     setTimerPhotoInterval(null);
     setCounter(defaultTimer)
 
-    // setDisableAll(true)
     // setDisableSend(true)
     setHasPhoto(true)
 
@@ -326,7 +309,6 @@ export default function CadastroRosto() {
       })
 
     }
-    setDisableAll(false)
     setLoading(false)
 
   }
@@ -504,9 +486,7 @@ export default function CadastroRosto() {
                   <a href={photoLink} download={downloadFileName}>
 
                     <NavigationButton icon={<TbDownload />} disabled={disableSend || message.error} onClick={_ => {
-                      setDisableAll()
                       setDownloadFileName(`face_cropper-${getDateTime()}.png`)
-                      // route.push('/cadastro-documento')
                     }}>
                       <p className={`hidden sm:block`}>Download</p>
                     </NavigationButton>
