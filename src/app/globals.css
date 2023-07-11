@@ -1,0 +1,55 @@
+@import "~@flaticon/flaticon-uicons/css/all/all";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer components {
+  .default-input {
+    @apply bg-input text-input-text text-xl font-semibold rounded-2xl p-4 block shadow-sm mt-3 m-auto w-full max-w-xl border-2 hover:border-usgmathe/70 focus:outline-usgmathe/70 transition-all duration-300;
+  }
+
+  .default-input-title  {
+    @apply font-bold text-xl text-default
+  }
+
+  .default-button {
+    @apply flex justify-center items-center gap-5 font-bold text-xl py-4 px-6 rounded-full w-full max-w-xl text-white bg-usgmathe hover:bg-usgmathe-hover hover:scale-95 transition-all duration-300 shadow-md z-50
+  }
+
+  .default-title {
+    @apply my-5 self-center text-center font-extrabold text-5xl
+  }
+
+  .default-form {
+    @apply  w-full max-w-2xl py-10 px-6 rounded-2xl shadow-2xl shadow-usgmathe/80 border-solid border-2 border-gray-100 bg-white
+  }
+
+  .animate-pulse-3s{
+    @apply animate-pulse;
+    animation-duration: 3s;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  overscroll-behavior: none;
+  overflow: auto;
+  background-color: #121212;
+  color: white;
+}
