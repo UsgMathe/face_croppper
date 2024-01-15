@@ -244,73 +244,7 @@ export default function CadastroRosto() {
     clearInterval(timerPhotoInterval);
     setTimerPhotoInterval(null);
     setCounter(defaultTimer)
-
-    // setDisableSend(true)
     setHasPhoto(true)
-
-    // postCropPhoto(cadastro.name, cadastro.cpf, imageSrc, true)
-
-  }
-
-  const postCropPhoto = async (name, cpf, imageSrc, tryAgain) => {
-    const postImage = await API_Post('/api/recortarfoto', { cpf: cpf, base64_rosto: imageSrc })
-    if (postImage.ok) {
-
-      if (postImage.data === "rosto não encontrado") {
-        setCardPhoto({
-          error: true,
-          photo: 'null',
-          name: name,
-          status: "Rosto não encontrado",
-        })
-        setMessage({
-          enabled: true,
-          error: true,
-          description: "Rosto não encontrado"
-        })
-      } else if (postImage.data === "" && tryAgain == true) {
-        postCropPhoto(name, cpf, imageSrc, false)
-      } else if (postImage.data === "") {
-        setMessage({
-          enabled: true,
-          error: true,
-          description: "Não foi possível processar a foto, tente novamente!"
-        })
-
-      } else {
-        setCardPhoto({
-          error: false,
-          photo: postImage.data,
-          name: name,
-          status: null
-        })
-
-        setMessage({
-          enabled: false,
-          error: false,
-          description: ""
-        })
-
-        setHasPhoto(true)
-        setDisableSend(false)
-        setPhotoLink(postImage.data)
-      }
-    } else {
-      setCardPhoto({
-        error: true,
-        photo: "null",
-        name: name,
-        status: `Não foi possível processar a foto, tente novamente! (${postImage.title})`,
-      })
-      setMessage({
-        enabled: true,
-        error: true,
-        description: `Não foi possível processar a foto, tente novamente! (${postImage.title})`
-      })
-
-    }
-    setLoading(false)
-
   }
 
   const tryAgain = () => {
