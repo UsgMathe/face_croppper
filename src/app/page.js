@@ -6,9 +6,6 @@ import Link from "next/link"
 import Button from '../components/Button'
 import Cookies from 'js-cookie'
 import { useState, useEffect } from 'react'
-
-import { API_Delete } from '../services/api/API_Delete'
-
 import { TbFaceId } from 'react-icons/tb'
 
 export default function Home() {
